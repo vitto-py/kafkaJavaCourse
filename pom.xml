@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>kafkaSRJava</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.avro/avro-maven-plugin -->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.12.0</version>
+        </dependency>
+    </dependencies>
+
+    <!-- now the build -->
+    <build>
+        <plugins>
+            <!-- The Offical AVRO Plugin -->
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.12.0</version>
+                <!-- GENERATE SOURCES-->
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <configuration>
+
+                            <!-- Where your .avsc files live -->
+                            <sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
+                            <!-- Where generated Java Classes Go -->
+                            <outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
+
+                            <!-- Recommended Configurations, can delete them if you want  -->
+                            <stringType>String</stringType>
+                            <createSetters>false</createSetters>
+                            <enableDecimalLogicalType>true</enableDecimalLogicalType>
+                            </configuration>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <!-- Make Maven compile the generated sources -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+</project>

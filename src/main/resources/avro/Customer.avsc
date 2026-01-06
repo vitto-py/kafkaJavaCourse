@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "namespace": "com.example",
+  "name": "Customer",
+  "fields": [
+    {"name": "first_name", "type": "string"},
+    {"name": "middle_name", "type": ["null", "string"], "default": null},
+    {"name": "last_name", "type": "string"},
+    {"name": "age", "type": "float"},
+    {"name": "weight", "type": "float"},
+    {"name": "customer_emails", "type": {"type": "array", "items": "string"}}
+  ]
+}
